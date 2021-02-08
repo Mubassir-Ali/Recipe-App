@@ -16,12 +16,12 @@ import {
 
 import { makeStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import imgData from './../Data/imgurl.json';
+import imgData from './../Data/imagesUrl.json';
 
 const useStyle = makeStyles((theme) => ({
 	root: {
 		minWidth: '100%',
-		height: '100vh',
+		height: '100%',
 		backgroundColor: theme.palette.grey[300],
 		paddingTop: theme.spacing(5)
 	},
@@ -40,15 +40,15 @@ export const Cards = () => {
 	return (
 		<Container className={classes.root}>
 			<Grid container spacing={5}>
-				{Object.entries(imgData.slice(11,20)).map(([index,{imgUrl}]) => (
+				{Object.entries(imgData).map(([index,{url,authorImage,authorName,desc}]) => (
 					
 					<Grid key={index} item xs={12} sm={6} lg={3}>
 					<Card>
 						<CardActionArea>
 							<CardHeader
-								title="Food Recipe"
+								title={authorName}
 								subheader="Posted: 7 Feb 2021"
-								avatar={<Avatar>MA</Avatar>}
+								avatar={<Avatar><img src={authorImage} alt={authorName} /></Avatar>}
 								action={
 									<IconButton>
 										<AddShoppingCartIcon />
@@ -57,19 +57,17 @@ export const Cards = () => {
 							/>
 							<CardMedia
 								component="img"
-								image={imgUrl}
+								image={url}
 								className={classes.media}
 							/>
 						</CardActionArea>
 
 						<CardContent>
 							<Typography variant="h6" className={classes.upperCase}>
-								product type
+								{desc.split(' ')[0].replace(',','')}
 							</Typography>
 							<Typography variant="subtitle2">
-								Magna laboris non in consectetur cupidatat proident ullamco qui ex laboris in non quis .
-								Aute irure est ex id est aute labore incididunt sint qui ullamco. Aute tempor consequat
-								ut ut esse. Voluptate pariatur magna id mollit laborum .
+							{desc}
 							</Typography>
 						</CardContent>
 						<CardActions>
